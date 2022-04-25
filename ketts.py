@@ -50,6 +50,38 @@ async def on_message(ctx):
     #ff
     elif 'surrender' in ctx.content:
         await ctx.channel.send(f"{random.choice(agents)}") 
+    
+   
 
-        
+
+
+from datetime import datetime
+from pytz import timezone
+  
+format = "%Y-%m-%d %I:%M:%S:%p"
+  
+# Current time in UTC
+now_utc = datetime.now(timezone('UTC'))
+  
+# Convert to Asia/Kolkata time zone
+indiautc = now_utc.astimezone(timezone('Asia/Kolkata'))
+ind=(indiautc.strftime(format))
+
+phutc = now_utc.astimezone(timezone('Asia/Manila'))
+ph=(phutc.strftime(format))
+
+singaporeutc = now_utc.astimezone(timezone('Asia/Singapore'))
+sg=(singaporeutc.strftime(format))
+
+scutc = now_utc.astimezone(timezone('America/New_York'))
+sc=(scutc.strftime(format))
+
+
+
+@client.event
+async def on_message(message):
+    if message.content == "time":
+        await message.channel.send("the time in singapore is"+" "+sg+"\n"+"the time in philippines is"+" "+ph+"\n"+" "+"the time in India is"+ind+" "+"\n"+"the time in south carolina is"+" "+sc+"\n", reference=message)
+
+
 client.run(config.api_key)
